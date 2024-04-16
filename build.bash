@@ -1,0 +1,1 @@
+g++ CommandListener.h CommandListener.cpp -o CommandListener.out InputHandler.h InputHandler.cpp -o  InputHandler.out Actor.h Actor.cpp -o Actor.out Scarfy.h Scarfy.cpp -o Scarfy.out Scene.h Scene.cpp -o Scene.out ScarfyScene.h ScarfyScene.cpp -o ScarfyScene.out Main.cpp -o Main.out -lraylib -lGL -lm -lpthread -ldl -lrt -lX11
