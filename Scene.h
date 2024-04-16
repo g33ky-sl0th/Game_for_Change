@@ -88,5 +88,5 @@ protected:
 	
 	/** Downward acceleration due to gravity.
 	 */
-	float gravity; // I don't need
+	// float gravity; // I don't need
 };

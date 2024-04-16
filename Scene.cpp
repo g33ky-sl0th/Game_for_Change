@@ -36,20 +36,20 @@ std::shared_ptr<Scene> Scene::update() {
 		
 		auto boundingRect = actor->getBoundingBox();
 
-		auto distToGround = groundYPos - (boundingRect.y + boundingRect.height);
-		bool isOnGround =  distToGround <= 0;
+		// auto distToGround = groundYPos - (boundingRect.y + boundingRect.height);
+		// bool isOnGround =  distToGround <= 0;
 		
-		if(isOnGround) {
+		// if(isOnGround) {
 
-			actor->velocity.y = 0;
-			actor->position.y += distToGround;
-		} 
+		// 	actor->velocity.y = 0;
+		// 	actor->position.y += distToGround;
+		// } 
 		
-		else {
-			actor->velocity.y += gravity;
-		}
+		// else {
+		// 	actor->velocity.y += gravity;
+		// }
 
-		actor->update(isOnGround);
+		actor->update();
 	}
 	
 	return nullptr;

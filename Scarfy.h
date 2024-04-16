@@ -15,7 +15,7 @@ public:
 	
 	virtual ~Scarfy();
 	
-	virtual bool update(bool onGround);
+	virtual bool update();
 	
 	virtual void draw();
 	
@@ -55,10 +55,13 @@ private:
 
 	unsigned frameDelay;
 	unsigned frameDelayCounter;
-	unsigned frameIndex;
+
+	// unsigned frameIndex;
+	unsigned int frame_counter_hori;
+    unsigned int frame_counter_vert;
 	
     // Rectangle frameRect;
-    Rectangle main_hero_frame = {0.0f, 0.0f, (float)main_hero.width/main_hero_hori_frames, (float)main_hero.height/main_hero_vert_frames};
+    Rectangle main_hero_frame;
 
 	
 	float jumpSpeed;

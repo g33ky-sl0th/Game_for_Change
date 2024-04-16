@@ -7,14 +7,14 @@ static const int jumpDownFrame = 4;
 static const int footstepFrame1 = 1;
 static const int footstepFrame2 = 4;
 
-static bool isFootstepFrame(int frameIndex) {
+// static bool isFootstepFrame(int frameIndex) {
 	
-	if(frameIndex == footstepFrame1 || frameIndex == footstepFrame2) {
-		return true;
-	} else {
-		return false;
-	}
-}
+// 	if(frameIndex == footstepFrame1 || frameIndex == footstepFrame2) {
+// 		return true;
+// 	} else {
+// 		return false;
+// 	}
+// }
 
 Scarfy::Scarfy() 
 
@@ -41,10 +41,13 @@ Scarfy::Scarfy()
     Rectangle main_hero_frame = {0.0f, 0.0f, (float)main_hero.width/main_hero_hori_frames, (float)main_hero.height/main_hero_vert_frames};
 
 
-	frameDelay = 5;
+	frameDelay = 3;
 	frameDelayCounter = 0;
-	frameIndex = 0;
-	
+
+	// frameIndex = 0;
+	frame_counter_hori = 0;
+    frame_counter_vert = 0;
+
 	walkSpeed = 10;
 	jumpSpeed = 2 * walkSpeed;
 	
@@ -54,25 +57,27 @@ Scarfy::Scarfy()
 Scarfy::~Scarfy() {
 }
 	
-bool Scarfy::update(bool onGround) {
+bool Scarfy::update() {
 
 	bool b1 = velocity.x == 0.0f;
 	bool b2 = velocity.y == 0.0f;
 
 	bool scarfyMoving = b1 || b2;
 			
-	bool wasOnGround = isOnGround;
-	isOnGround = onGround;
+	// bool wasOnGround = isOnGround;
+	// isOnGround = onGround;
 	
 	// if(isOnGround && !wasOnGround) {
 	// 	PlaySound(landingSound);
 	// }
 	
 	++frameDelayCounter;
+
 	if(frameDelayCounter > frameDelay) {
 		frameDelayCounter = 0;
 		
 		if(scarfyMoving) {
+
 			if(isOnGround) {
 				++frameIndex;
 				frameIndex %= numFrames;
@@ -80,7 +85,9 @@ bool Scarfy::update(bool onGround) {
 				// if(isFootstepFrame(frameIndex)) {
 				// 	PlaySound(footstepSound);
 				// }
-			} else {
+			} 
+			
+			else {
 				if(velocity.y < 0) {
 					frameIndex = jumpUpFrame;
 				} else {
@@ -88,6 +95,8 @@ bool Scarfy::update(bool onGround) {
 				}
 			}
 			frameRect.x = (float) frameWidth * frameIndex;
+
+			
 		}
 	}
 	
@@ -107,7 +116,13 @@ Rectangle Scarfy::getBoundingBox() {
 	
 void Scarfy::goUp() {
 	if(isOnGround) {
-		velocity.y = -jumpSpeed;
+		velocity.y = -walkSpeed;
+	}
+}
+
+void Scarfy::goDown() {
+	if(isOnGround) {
+		velocity.y = +walkSpeed;
 	}
 }
 	
@@ -131,11 +146,10 @@ void Scarfy::goRight() {
 
 void Scarfy::goNowhere() {
 	if(isOnGround) {
+
 		velocity.x = 0;
+		velocity.y = 0;
 	}
-}
-	
-void Scarfy::goDown() {
 }
 	
 void Scarfy::doInteractWith() {
