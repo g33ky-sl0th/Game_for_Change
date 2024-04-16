@@ -96,22 +96,26 @@ bool Scarfy::update() {
 			}
 			frameRect.x = (float) frameWidth * frameIndex;
 
-			
+
 		}
 	}
 	
 	return true;
 }
+
+Vector2 Scarfy::getUpperLeftPosition() {
+	return {position.x - main_hero_frame_width / 2, position.y - main_hero_frame_height/2};
+}
 	
 void Scarfy::draw() {
 	Vector2 ulPosition = getUpperLeftPosition();
-	DrawTextureRec(texture, frameRect, ulPosition, WHITE);
+	DrawTextureRec(main_hero, main_hero_frame, ulPosition, WHITE);
 }
 	
 Rectangle Scarfy::getBoundingBox() {
 	
     Vector2 ulPosition = getUpperLeftPosition();
-	return {ulPosition.x, ulPosition.y, texture.width, texture.height};
+	return {ulPosition.x, ulPosition.y, main_hero_frame_width, main_hero_frame_height};
 }
 	
 void Scarfy::goUp() {
@@ -153,8 +157,4 @@ void Scarfy::goNowhere() {
 }
 	
 void Scarfy::doInteractWith() {
-}
-
-Vector2 Scarfy::getUpperLeftPosition() {
-	return {position.x - frameWidth / 2, position.y - texture.height};
 }
