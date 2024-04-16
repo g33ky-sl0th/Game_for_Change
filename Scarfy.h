@@ -40,17 +40,26 @@ private:
 	 */
 	Vector2 getUpperLeftPosition();
 
-	Texture2D texture;
+	Texture2D main_hero;
 
-	
 	// Animation state
-	unsigned numFrames;
-	int frameWidth;
+	// unsigned numFrames;
+
+	unsigned main_hero_hori_frames = 9;
+    unsigned main_hero_vert_frames = 4;
+
+	// int frameWidth;
+	int main_hero_frame_width;
+	int main_hero_frame_height;
+
+
 	unsigned frameDelay;
 	unsigned frameDelayCounter;
 	unsigned frameIndex;
 	
-    Rectangle frameRect;
+    // Rectangle frameRect;
+    Rectangle main_hero_frame = {0.0f, 0.0f, (float)main_hero.width/main_hero_hori_frames, (float)main_hero.height/main_hero_vert_frames};
+
 	
 	float jumpSpeed;
 	float walkSpeed;

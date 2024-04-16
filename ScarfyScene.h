@@ -1,7 +1,8 @@
 #pragma once
 
 #include "Scene.h"
-#include "Scarfy.h"
+
+#include "Scarfy.h" ////////////////////////
 
 /** A scene for scarfy to walk around in.
  */

@@ -56,9 +56,10 @@ std::shared_ptr<Scene> Scene::update() {
 }
 	
 void Scene::draw() {
-	ClearBackground(RAYWHITE);
+
+	ClearBackground(GREEN);
 		
-	if(actors.size()) {
+	if(actors.size() != 0) {
 
 		for(auto &actor: actors) {
 			actor->draw();

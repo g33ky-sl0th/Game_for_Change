@@ -25,12 +25,22 @@ Scarfy::Scarfy()
         
     {
 	
-    texture = LoadTexture("scarfy.png"),
+    main_hero = LoadTexture("characters/main_hero_movt.png"),
 	
-	numFrames = 6;
-	frameWidth = texture.width / numFrames;
-	frameRect = {0.0f, 0.0f, (float)frameWidth, (float)texture.height};
-	
+	// numFrames = 6;
+
+	main_hero_hori_frames = 9;
+    main_hero_vert_frames = 4;
+
+	// frameWidth = texture.width / numFrames;
+
+	main_hero_frame_width = main_hero.width / main_hero_hori_frames;
+    main_hero_frame_height = main_hero.height / main_hero_vert_frames;
+
+	// frameRect = {0.0f, 0.0f, (float)frameWidth, (float)texture.height};
+    Rectangle main_hero_frame = {0.0f, 0.0f, (float)main_hero.width/main_hero_hori_frames, (float)main_hero.height/main_hero_vert_frames};
+
+
 	frameDelay = 5;
 	frameDelayCounter = 0;
 	frameIndex = 0;
