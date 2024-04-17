@@ -18,7 +18,7 @@ void ScarfyScene::loadResources() {
 	int sceneHeight = GetScreenHeight();
 	// scarfy->position = {(float)sceneWidth / 2, (float)groundYPos};
 	scarfy->position = {(float)sceneWidth / 2, (float)sceneHeight/2};
-
+	// scarfy->Actor_dimension = 
 
 	playerAvatar = scarfy;
 	actors.emplace_back(scarfy);

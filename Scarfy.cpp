@@ -1,11 +1,12 @@
 #include "Scarfy.h"
 #include "raymath.h"
 
+#include<iostream>
 
-static const int jumpUpFrame = 3;
-static const int jumpDownFrame = 4;
-static const int footstepFrame1 = 1;
-static const int footstepFrame2 = 4;
+// static const int jumpUpFrame = 3;
+// static const int jumpDownFrame = 4;
+// static const int footstepFrame1 = 1;
+// static const int footstepFrame2 = 4;
 
 // static bool isFootstepFrame(int frameIndex) {
 	
@@ -25,8 +26,10 @@ Scarfy::Scarfy()
         
     {
 	
-    main_hero = LoadTexture("characters/main_hero_movt.png"),
-	
+    main_hero = LoadTexture("main_hero_movt.png");
+	car = LoadTexture("Car_1_01.png");
+
+
 	// numFrames = 6;
 
 	main_hero_hori_frames = 9;
@@ -36,9 +39,10 @@ Scarfy::Scarfy()
 
 	main_hero_frame_width = main_hero.width / main_hero_hori_frames;
     main_hero_frame_height = main_hero.height / main_hero_vert_frames;
+	// std::cout << main_hero_frame_width << " " << main_hero_frame_height << "allah \n";
 
 	// frameRect = {0.0f, 0.0f, (float)frameWidth, (float)texture.height};
-    Rectangle main_hero_frame = {0.0f, 0.0f, (float)main_hero.width/main_hero_hori_frames, (float)main_hero.height/main_hero_vert_frames};
+    Rectangle main_hero_frame = {0.0f, 0.0f, (float)main_hero_frame_width, (float)main_hero_frame_height};
 
 
 	frameDelay = 3;
@@ -48,13 +52,16 @@ Scarfy::Scarfy()
 	frame_counter_hori = 0;
     frame_counter_vert = 0;
 
-	walkSpeed = 10;
-	jumpSpeed = 2 * walkSpeed;
+	walkSpeed = 2;
+
+	// jumpSpeed = 2 * walkSpeed;
 	
-	isOnGround = true;
+	// isOnGround = true;
 }
 	
 Scarfy::~Scarfy() {
+	UnloadTexture(main_hero);
+	UnloadTexture(car);
 }
 	
 bool Scarfy::update() {
@@ -62,7 +69,7 @@ bool Scarfy::update() {
 	bool b1 = velocity.x == 0.0f;
 	bool b2 = velocity.y == 0.0f;
 
-	bool scarfyMoving = b1 || b2;
+	bool scarfyMoving = !(b1 && b2);
 			
 	// bool wasOnGround = isOnGround;
 	// isOnGround = onGround;
@@ -74,87 +81,130 @@ bool Scarfy::update() {
 	++frameDelayCounter;
 
 	if(frameDelayCounter > frameDelay) {
+
 		frameDelayCounter = 0;
 		
 		if(scarfyMoving) {
 
-			if(isOnGround) {
-				++frameIndex;
-				frameIndex %= numFrames;
-				
-				// if(isFootstepFrame(frameIndex)) {
-				// 	PlaySound(footstepSound);
-				// }
-			} 
-			
-			else {
-				if(velocity.y < 0) {
-					frameIndex = jumpUpFrame;
-				} else {
-					frameIndex = jumpDownFrame;
-				}
-			}
-			frameRect.x = (float) frameWidth * frameIndex;
+			std::cout << "hi84";
+			++frame_counter_hori;
+			frame_counter_hori %= main_hero_hori_frames;
+			main_hero_frame.x = (float)main_hero_frame_width * frame_counter_hori;
 
+			if (velocity.y < 0){
+
+				// std::cout << "up\n";
+
+				frame_counter_vert = 0;
+                main_hero_frame.y = (float)frame_counter_vert * main_hero_frame_height;
+			}
+
+			else if (velocity.y > 0){
+
+				// std::cout << "down\n";
+
+				frame_counter_vert = 2;
+                main_hero_frame.y = (float)frame_counter_vert * main_hero_frame_height;
+			}
+
+			else if (velocity.x < 0){	// left
+
+				// std::cout << "left\n";
+
+				frame_counter_vert = 1; 
+                main_hero_frame.y = (float)frame_counter_vert * main_hero_frame_height;
+			}
+
+			else if (velocity.x > 0){	// right
+
+				// std::cout << "right\n";
+
+				frame_counter_vert = 3;             
+                main_hero_frame.y = (float)frame_counter_vert * main_hero_frame_height;
+			}
+
+			// if(isOnGround) {
+
+			// 	++frameIndex;
+			// 	frameIndex %= numFrames;
+				
+			// 	// if(isFootstepFrame(frameIndex)) {
+			// 	// 	PlaySound(footstepSound);
+			// 	// }
+			// } 
+			
+			// else {
+
+			// 	if(velocity.y < 0) {
+			// 		frameIndex = jumpUpFrame;
+			// 	} else {
+			// 		frameIndex = jumpDownFrame;
+			// 	}
+			// }
+
+
+			// frameRect.x = (float) frameWidth * frameIndex;
 
 		}
 	}
 	
 	return true;
 }
-
-Vector2 Scarfy::getUpperLeftPosition() {
-	return {position.x - main_hero_frame_width / 2, position.y - main_hero_frame_height/2};
-}
 	
 void Scarfy::draw() {
+	// std::cout << "hello";
 	Vector2 ulPosition = getUpperLeftPosition();
+
+	main_hero_frame.width = main_hero_frame_width;
+	main_hero_frame.height = main_hero_frame_height;
+
+	// std::cout << "here - " << main_hero_frame.x << " " << main_hero_frame.y << " " <<main_hero_frame.width << " " << main_hero_frame.height << "\n";
+
+
 	DrawTextureRec(main_hero, main_hero_frame, ulPosition, WHITE);
+	// DrawTexture(car, 0, 0, RED);
+
 }
 	
 Rectangle Scarfy::getBoundingBox() {
 	
     Vector2 ulPosition = getUpperLeftPosition();
-	return {ulPosition.x, ulPosition.y, main_hero_frame_width, main_hero_frame_height};
+	return {ulPosition.x, ulPosition.y, (float)main_hero_frame_width, (float)main_hero_frame_height};
 }
 	
 void Scarfy::goUp() {
-	if(isOnGround) {
-		velocity.y = -walkSpeed;
-	}
+
+	velocity.x = 0;
+	velocity.y = -walkSpeed;
 }
 
 void Scarfy::goDown() {
-	if(isOnGround) {
-		velocity.y = +walkSpeed;
-	}
+
+	velocity.x = 0;
+	velocity.y = +walkSpeed;
 }
 	
 void Scarfy::goLeft() {
-	if(isOnGround) {
-		velocity.x = -walkSpeed;
-		if(frameRect.width > 0) {
-			frameRect.width = -frameRect.width;
-		}
-	}
+
+	velocity.y = 0;
+	velocity.x = -walkSpeed;
 }
 	
 void Scarfy::goRight() {
-	if(isOnGround) {
-		velocity.x = walkSpeed;
-		if(frameRect.width < 0) {
-			frameRect.width = -frameRect.width;
-		}
-	}
+
+	velocity.y = 0;
+	velocity.x = +walkSpeed;
 }
 
 void Scarfy::goNowhere() {
-	if(isOnGround) {
 
 		velocity.x = 0;
 		velocity.y = 0;
-	}
 }
 	
 void Scarfy::doInteractWith() {
+}
+
+Vector2 Scarfy::getUpperLeftPosition() {
+	return {position.x - main_hero_frame_width / 2, position.y};
 }

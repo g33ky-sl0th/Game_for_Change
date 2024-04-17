@@ -11,8 +11,11 @@ Actor::Actor() {
 Actor::~Actor() {
 }
 
-bool Actor::update(bool onGround) {
-	return true;
+// bool Actor::update(bool onGround) {
+// 	return true;
+// }
+
+bool Actor::update() {
 }
 
 void Actor::draw() {

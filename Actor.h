@@ -27,7 +27,7 @@ public:
 	 * @return bool true if this actor still exists, and false if it has "exited
 	 * the scene, never to return" (e., dead)
 	 */
-	virtual bool update(bool onGround);
+	virtual bool update();
 	
 	/** Draws this actor to the display.
 	 */

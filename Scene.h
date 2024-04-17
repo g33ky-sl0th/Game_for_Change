@@ -84,7 +84,7 @@ protected:
 	
 	/** The ground's y position in pixels from the top of the screen.
 	 */
-	int groundYPos; // I don't require
+	// int groundYPos; // I don't require
 	
 	/** Downward acceleration due to gravity.
 	 */

@@ -6,8 +6,8 @@
 Scene::Scene() {
 	int sceneHeight = GetScreenHeight();
 
-	groundYPos = (3 * sceneHeight) / 4;
-	gravity = 1;
+	// groundYPos = (3 * sceneHeight) / 4;
+	// gravity = 1;
 }
 	
 Scene::~Scene() {
@@ -57,7 +57,7 @@ std::shared_ptr<Scene> Scene::update() {
 	
 void Scene::draw() {
 
-	ClearBackground(GREEN);
+	ClearBackground(RAYWHITE);
 		
 	if(actors.size() != 0) {
 

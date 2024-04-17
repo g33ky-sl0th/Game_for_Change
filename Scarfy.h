@@ -35,18 +35,19 @@ public:
 	 */
 	virtual void doInteractWith();
 	
+	Vector2 getUpperLeftPosition();
 private:
 	/** Calculates the position of this object's upper-left corner.
 	 */
-	Vector2 getUpperLeftPosition();
 
 	Texture2D main_hero;
+	Texture2D car;
 
 	// Animation state
 	// unsigned numFrames;
 
-	unsigned main_hero_hori_frames = 9;
-    unsigned main_hero_vert_frames = 4;
+	int main_hero_hori_frames = 9;
+    int main_hero_vert_frames = 4;
 
 	// int frameWidth;
 	int main_hero_frame_width;
@@ -64,8 +65,9 @@ private:
     Rectangle main_hero_frame;
 
 	
-	float jumpSpeed;
+	// float jumpSpeed;
+	
 	float walkSpeed;
 	
-	bool isOnGround;
+	// bool isOnGround;
 };
