@@ -54,6 +54,10 @@ std::shared_ptr<Scene> Scene::update() {
 	
 	return nullptr;
 }
+
+bool Scene::shouldQuit() {
+	return false;
+}
 	
 void Scene::draw() {
 
@@ -68,7 +72,7 @@ void Scene::draw() {
 	} 
 	
 	else {
-		DrawText("This scene has no content. Add some actors, or override Scene::draw()", 20, 20, 20, RED);
+		DrawText("Are you ready for actual virtual tour of IIT-Delhi ?!", 20, 20, 20, BLUE);
 	}
 }
 	

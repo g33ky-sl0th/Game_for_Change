@@ -53,6 +53,10 @@ public:
 	 * @return std::shared_ptr<Scene> the next scene, or nullptr if this scene 
 	 */
 	virtual std::shared_ptr<Scene> update();
+
+	/** Returns true if the program should quit.
+	 */
+	virtual bool shouldQuit();
 	
 	/** Draws the scene to the display.
 	 */
