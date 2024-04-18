@@ -48,4 +48,6 @@ public:
 	Vector2 velocity;
 
 	Vector2 Actor_dimension;
+
+	bool isMain;
 };
