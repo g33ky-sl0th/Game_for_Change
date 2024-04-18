@@ -33,9 +33,11 @@ Drug1::Drug1()
         
     {
 
+	isRevived = false;
+
 	isMain = false;
 	
-    drug_1 = LoadTexture("main_hero_movt.png");
+    drug_1 = LoadTexture("characters/drug1_revive.png");
 	// car = LoadTexture("Car_1_01.png");
 
 	// map = LoadTiled("desert.json"); 
@@ -52,17 +54,16 @@ Drug1::Drug1()
 	drug_1_frame_width = drug_1.width / drug_1_hori_frames;
     drug_1_frame_height = drug_1.height / drug_1_vert_frames;
 	// std::cout << main_hero_frame_width << " " << main_hero_frame_height << "allah \n";
+	
+	// frameIndex = 0;
+	frame_counter_hori = 5;
+    frame_counter_vert = 0;
 
 	// frameRect = {0.0f, 0.0f, (float)frameWidth, (float)texture.height};
-    Rectangle drug_1_frame = {0.0f, 0.0f, (float)drug_1_frame_width, (float)drug_1_frame_height};
-
+    Rectangle drug_1_frame = {5.0f * (float)drug_1_frame_width, 0.0f, (float)drug_1_frame_width, (float)drug_1_frame_height};
 
 	frameDelay = 3;
 	frameDelayCounter = 0;
-
-	// frameIndex = 0;
-	frame_counter_hori = 0;
-    frame_counter_vert = 0;
 
 	walkSpeed = 2;
 
@@ -81,11 +82,6 @@ Drug1::~Drug1() {
 }
 	
 bool Drug1::update() {
-
-	bool b1 = velocity.x == 0.0f;
-	bool b2 = velocity.y == 0.0f;
-
-	bool scarfyMoving = !(b1 && b2);
 			
 	// bool wasOnGround = isOnGround;
 	// isOnGround = onGround;
@@ -99,69 +95,25 @@ bool Drug1::update() {
 	if(frameDelayCounter > frameDelay) {
 
 		frameDelayCounter = 0;
-		
-		if(scarfyMoving) {
 
-			// std::cout << "hi84";
-			++frame_counter_hori;
+		// std::cout << "hi84";
+
+		if (isRevived == false){
+
+			--frame_counter_hori;
 			frame_counter_hori %= drug_1_hori_frames;
 			drug_1_frame.x = (float)drug_1_frame_width * frame_counter_hori;
 
-			if (velocity.y < 0){
-
-				// std::cout << "up\n";
-
-				frame_counter_vert = 0;
-                drug_1_frame.y = (float)frame_counter_vert * drug_1_frame_height;
+			if (frame_counter_hori == 0){
+				isRevived = true;
 			}
-
-			else if (velocity.y > 0){
-
-				// std::cout << "down\n";
-
-				frame_counter_vert = 2;
-                drug_1_frame.y = (float)frame_counter_vert * drug_1_frame_height;
-			}
-
-			else if (velocity.x < 0){	// left
-
-				// std::cout << "left\n";
-
-				frame_counter_vert = 1; 
-                drug_1_frame.y = (float)frame_counter_vert * drug_1_frame_height;
-			}
-
-			else if (velocity.x > 0){	// right
-
-				// std::cout << "right\n";
-
-				frame_counter_vert = 3;             
-                drug_1_frame.y = (float)frame_counter_vert * drug_1_frame_height;
-			}
-
-			// if(isOnGround) {
-
-			// 	++frameIndex;
-			// 	frameIndex %= numFrames;
-				
-			// 	// if(isFootstepFrame(frameIndex)) {
-			// 	// 	PlaySound(footstepSound);
-			// 	// }
-			// } 
-			
-			// else {
-
-			// 	if(velocity.y < 0) {
-			// 		frameIndex = jumpUpFrame;
-			// 	} else {
-			// 		frameIndex = jumpDownFrame;
-			// 	}
-			// }
-
-
-			// frameRect.x = (float) frameWidth * frameIndex;
-
 		}
+
+		else if (isRevived == true){
+
+			DrawText("Already revived sirji", 50, 50, 20, GREEN);
+		}
+
 	}
 	
 	return true;
@@ -179,9 +131,18 @@ void Drug1::draw() {
 	drug_1_frame.width = drug_1_frame_width;
 	drug_1_frame.height = drug_1_frame_height;
 
+	if (isRevived == false){
+		DrawTextureRec(drug_1, drug_1_frame, ulPosition, RED);
+	}
 
+	else if (isRevived == true){
+		DrawTextureRec(drug_1, drug_1_frame, ulPosition, WHITE);
+	}
 
-	DrawTextureRec(drug_1, drug_1_frame, ulPosition, WHITE);
+	else {
+		DrawText("error bhai for drug1", 50, 50, 40, RED);
+	}
+
 	// DrawTexture(car, 0, 0, RED);
 
 }
