@@ -3,6 +3,7 @@
 #include "Scene.h"
 
 #include "Scarfy.h" ////////////////////////
+#include "Drug1.h"
 
 /** A scene for scarfy to walk around in.
  */

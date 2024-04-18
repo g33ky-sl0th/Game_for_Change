@@ -50,4 +50,6 @@ public:
 	Vector2 Actor_dimension;
 
 	bool isMain;
+
+	bool isRevived;
 };

@@ -1,6 +1,13 @@
 #include "Scarfy.h"
 #include "raymath.h"
 
+// #include "pugixml.hpp"
+// #include "pugiconfig.hpp"
+
+#define RAYLIB_TILESON_IMPLEMENTATION
+#include "raylib-tileson.h"
+
+
 #include<iostream>
 
 // static const int jumpUpFrame = 3;
@@ -25,10 +32,16 @@ Scarfy::Scarfy()
 		// landingSound("Single-footstep-in-grass-B-www.fesliyanstudios.com.mp3") 
         
     {
+
+	isMain = true;
+	isFpressed = false;
 	
     main_hero = LoadTexture("main_hero_movt.png");
-	car = LoadTexture("Car_1_01.png");
+	// car = LoadTexture("Car_1_01.png");
 
+	map = LoadTiled("desert.json"); 
+
+	// LoadTMXMap("resources/desert.tmx");
 
 	// numFrames = 6;
 
@@ -61,7 +74,11 @@ Scarfy::Scarfy()
 	
 Scarfy::~Scarfy() {
 	UnloadTexture(main_hero);
-	UnloadTexture(car);
+
+	UnloadMap(map);
+	// UnloadTexture(car);
+
+	// UnloadTMX(map);
 }
 	
 bool Scarfy::update() {
@@ -86,7 +103,7 @@ bool Scarfy::update() {
 		
 		if(scarfyMoving) {
 
-			std::cout << "hi84";
+			// std::cout << "hi84";
 			++frame_counter_hori;
 			frame_counter_hori %= main_hero_hori_frames;
 			main_hero_frame.x = (float)main_hero_frame_width * frame_counter_hori;
@@ -155,10 +172,14 @@ void Scarfy::draw() {
 	// std::cout << "hello";
 	Vector2 ulPosition = getUpperLeftPosition();
 
+	// std::cout << "here - " << map.height << " " << map.width << " " << map.tileWidth << " " << map.tileHeight << "\n";
+	
+
+	DrawTiled(map, 0, 0, WHITE);
+
 	main_hero_frame.width = main_hero_frame_width;
 	main_hero_frame.height = main_hero_frame_height;
 
-	// std::cout << "here - " << main_hero_frame.x << " " << main_hero_frame.y << " " <<main_hero_frame.width << " " << main_hero_frame.height << "\n";
 
 
 	DrawTextureRec(main_hero, main_hero_frame, ulPosition, WHITE);
@@ -203,6 +224,7 @@ void Scarfy::goNowhere() {
 }
 	
 void Scarfy::doInteractWith() {
+	isFpressed = true;
 }
 
 Vector2 Scarfy::getUpperLeftPosition() {

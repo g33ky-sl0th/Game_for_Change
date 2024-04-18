@@ -5,6 +5,9 @@
 #include <raylib.h>
 #include <raymath.h>
 
+#define RAYLIB_TILESON_IMPLEMENTATION
+#include "raylib-tileson.h"
+
 /** Our scarfy character.
  */
 class Scarfy : public Actor {
@@ -36,12 +39,22 @@ public:
 	virtual void doInteractWith();
 	
 	Vector2 getUpperLeftPosition();
+
+	Map map;
+
+	bool isFpressed;
+
+	// int tileSize = 64;
+
+
 private:
 	/** Calculates the position of this object's upper-left corner.
 	 */
 
 	Texture2D main_hero;
 	Texture2D car;
+
+	// tmx_map* map; 
 
 	// Animation state
 	// unsigned numFrames;
@@ -68,6 +81,8 @@ private:
 	// float jumpSpeed;
 	
 	float walkSpeed;
+
+	
 	
 	// bool isOnGround;
 };
