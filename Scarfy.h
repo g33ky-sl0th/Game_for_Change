@@ -47,6 +47,8 @@ public:
 
 	int main_hero_frame_height;
 
+	Texture2D mapTexture;
+
 private:
 	/** Calculates the position of this object's upper-left corner.
 	 */

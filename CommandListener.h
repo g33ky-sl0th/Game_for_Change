@@ -1,4 +1,5 @@
 #pragma once
+#include "raylib.h"
 
 /* Base class for objects that need to listen to user (or AI) commands.
  */
@@ -29,4 +30,6 @@ public:
 	virtual void doInteractWith_1();
 
 	virtual void doInteractWith_2();
+
+	static Camera2D screen_camera;
 };

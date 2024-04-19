@@ -33,13 +33,22 @@ Scarfy::Scarfy()
         
     {
 
+	screen_camera.target = {position.x, position.y};
+	screen_camera.offset = { 800.0f, 450.0f };
+    screen_camera.rotation = 0.0f;
+    screen_camera.zoom = 1.6f;
+
 	isMain = true;
 	isFpressed = false;
 	
     main_hero = LoadTexture("main_hero_movt.png");
 	// car = LoadTexture("Car_1_01.png");
 
-	map = LoadTiled("desert.json"); 
+	Image mapImage = LoadImage("IITD-map2.png");
+	mapTexture = LoadTextureFromImage(mapImage);
+
+
+	// map = LoadTiled("desert.json"); 
 
 	// LoadTMXMap("resources/desert.tmx");
 
@@ -73,11 +82,12 @@ Scarfy::Scarfy()
 }
 	
 Scarfy::~Scarfy() {
+
 	UnloadTexture(main_hero);
+	UnloadTexture(mapTexture);
 
-	UnloadMap(map);
+	// UnloadMap(map);
 	// UnloadTexture(car);
-
 	// UnloadTMX(map);
 }
 	
@@ -104,6 +114,9 @@ bool Scarfy::update() {
 		if(scarfyMoving) {
 
 			// std::cout << "hi84";
+
+			screen_camera.target = position;
+
 			++frame_counter_hori;
 			frame_counter_hori %= main_hero_hori_frames;
 			main_hero_frame.x = (float)main_hero_frame_width * frame_counter_hori;
@@ -172,18 +185,17 @@ void Scarfy::draw() {
 	// std::cout << "hello";
 	Vector2 ulPosition = getUpperLeftPosition();
 
-	// std::cout << "here - " << map.height << " " << map.width << " " << map.tileWidth << " " << map.tileHeight << "\n";
-	
+	BeginMode2D(screen_camera);
 
-	DrawTiled(map, 0, 0, WHITE);
+	DrawTexture(mapTexture, 0, 0, WHITE);
+	// DrawTiled(map, 0, 0, WHITE);
 
-	// main_hero_frame.width = main_hero_frame_width;
-	// main_hero_frame.height = main_hero_frame_height;
-
-
+	// DrawCircle(850,500, 15.0f, RED);
 
 	DrawTextureRec(main_hero, main_hero_frame, ulPosition, WHITE);
 	// DrawTexture(car, 0, 0, RED);
+
+	EndMode2D();
 
 }
 	

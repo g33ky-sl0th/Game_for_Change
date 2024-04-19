@@ -26,3 +26,5 @@ void CommandListener::doInteractWith_1() {
 
 void CommandListener::doInteractWith_2() {
 }
+
+Camera2D CommandListener::screen_camera = {0};
