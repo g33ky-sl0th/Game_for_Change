@@ -77,11 +77,15 @@ Scarfy::Scarfy()
 	frame_counter_hori = 0;
     frame_counter_vert = 0;
 
-	walkSpeed = 50;
+	walkSpeed = 6;
 
 	// jumpSpeed = 2 * walkSpeed;
 	
 	// isOnGround = true;
+
+	InitAudioDevice();
+    backgroundMusic = LoadMusicStream("bgm-game2.mp3");
+    PlayMusicStream(backgroundMusic);
 }
 	
 Scarfy::~Scarfy() {
@@ -89,12 +93,17 @@ Scarfy::~Scarfy() {
 	UnloadTexture(main_hero);
 	UnloadTexture(mapTexture);
 
+	UnloadMusicStream(backgroundMusic);
+    CloseAudioDevice();
+
 	// UnloadMap(map);
 	// UnloadTexture(car);
 	// UnloadTMX(map);
 }
 	
 bool Scarfy::update() {
+
+	UpdateMusicStream(backgroundMusic);
 
 	bool b1 = velocity.x == 0.0f;
 	bool b2 = velocity.y == 0.0f;
@@ -173,6 +182,8 @@ void Scarfy::draw() {
 
 	// DrawCircle(850,500, 15.0f, RED);
 
+	// std::cout << "x - " << position.x << " y : " << position.y << "\n";
+
 	DrawTextureRec(main_hero, main_hero_frame, ulPosition, WHITE);
 	// DrawTexture(car, 0, 0, RED);
 
@@ -190,7 +201,7 @@ void Scarfy::goUp() {
 
 	Color c1 = GetImageColor(mapImage,position.x , position.y - walkSpeed);
 
-	if ((c1.r == 35 && c1.g == 35 && c1.b ==45 && c1.a ==255) || (c1.r == 35 && c1.g == 255 && c1.b ==255 && c1.a ==255)) {
+	if ((c1.r == 35 && c1.g == 35 && c1.b ==45 && c1.a ==255) || (c1.r == 255 && c1.g == 255 && c1.b ==255 && c1.a ==255)) {
 
 		velocity.x = 0;
 		velocity.y = -walkSpeed;
@@ -208,7 +219,7 @@ void Scarfy::goDown() {
 
 	Color c1 = GetImageColor(mapImage,position.x , position.y + walkSpeed);
 
-	if ((c1.r == 35 && c1.g == 35 && c1.b ==45 && c1.a ==255) || (c1.r == 35 && c1.g == 255 && c1.b ==255 && c1.a ==255)){
+	if ((c1.r == 35 && c1.g == 35 && c1.b ==45 && c1.a ==255) || (c1.r == 255 && c1.g == 255 && c1.b ==255 && c1.a ==255)){
 
 		velocity.x = 0;
 		velocity.y = +walkSpeed;
@@ -226,7 +237,7 @@ void Scarfy::goLeft() {
 
 	Color c1 = GetImageColor(mapImage, position.x - walkSpeed, position.y);
 
-	if ((c1.r == 35 && c1.g == 35 && c1.b ==45 && c1.a ==255) || (c1.r == 35 && c1.g == 255 && c1.b ==255 && c1.a ==255)){
+	if ((c1.r == 35 && c1.g == 35 && c1.b ==45 && c1.a ==255) || (c1.r == 255 && c1.g == 255 && c1.b ==255 && c1.a ==255)){
 
 		velocity.y = 0;
 		velocity.x = -walkSpeed;
@@ -243,7 +254,7 @@ void Scarfy::goRight() {
 
 	Color c1= GetImageColor(mapImage, position.x + walkSpeed, position.y);
 
-	if ((c1.r == 35 && c1.g == 35 && c1.b ==45 && c1.a ==255) || (c1.r == 35 && c1.g == 255 && c1.b ==255 && c1.a ==255)) {
+	if ((c1.r == 35 && c1.g == 35 && c1.b ==45 && c1.a ==255) || (c1.r == 255 && c1.g == 255 && c1.b ==255 && c1.a ==255)) {
 
         velocity.y = 0;
 		velocity.x = +walkSpeed;

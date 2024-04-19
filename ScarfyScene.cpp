@@ -26,10 +26,10 @@ void ScarfyScene::loadResources() {
 
 	// Determine positions in world space
 	Vector2 drug1Pos = {200.0f, 200.0f}; // Example position for drug1
-	Vector2 drug2Pos = {600.0f, 200.0f}; // Example position for drug2
-	Vector2 drug3Pos = {200.0f, 600.0f}; // Example position for drug3
-	Vector2 drug4Pos = {600.0f, 600.0f}; // Example position for drug4
-	Vector2 drug5Pos = {400.0f, 300.0f}; // Example position for drug5
+	Vector2 drug2Pos = {2037.31f, 439.31f}; // Example position for drug2
+	Vector2 drug3Pos = {1862.42f, 4987.39f}; // Example position for drug3
+	Vector2 drug4Pos = {1766.0f, 3365.0f}; // Example position for drug4
+	Vector2 drug5Pos = {687.96f, 1100.02f}; // Example position for drug5
 
 	// Assign positions to drug1 to drug5
 	drug1->position = drug1Pos;

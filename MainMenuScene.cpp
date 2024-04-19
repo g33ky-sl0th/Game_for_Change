@@ -112,7 +112,7 @@ MainMenuScene::MainMenuScene() {
 	startClicked = false;
 	quit = false;
     InitAudioDevice();
-    backgroundMusic = LoadMusicStream("bgm_menu.mp3");
+    backgroundMusic = LoadMusicStream("bgm_menu-[AudioTrimmer.com].mp3");
     PlayMusicStream(backgroundMusic);
 }
 	

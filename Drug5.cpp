@@ -10,20 +10,6 @@
 
 #include<iostream>
 
-// static const int jumpUpFrame = 3;
-// static const int jumpDownFrame = 4;
-// static const int footstepFrame1 = 1;
-// static const int footstepFrame2 = 4;
-
-// static bool isFootstepFrame(int frameIndex) {
-	
-// 	if(frameIndex == footstepFrame1 || frameIndex == footstepFrame2) {
-// 		return true;
-// 	} else {
-// 		return false;
-// 	}
-// }
-
 Drug5::Drug5() 
 
         // : 

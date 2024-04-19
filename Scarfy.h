@@ -84,7 +84,7 @@ private:
 	
 	float walkSpeed;
 
-	
+	Music backgroundMusic;
 	
 	// bool isOnGround;
 };
