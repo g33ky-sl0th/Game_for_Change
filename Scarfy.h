@@ -36,16 +36,16 @@ public:
 	
 	/** Select, push, pull, punch, fire, etc.
 	 */
-	virtual void doInteractWith();
+	virtual void doInteractWith_1();
+	virtual void doInteractWith_2();
 	
 	Vector2 getUpperLeftPosition();
 
 	Map map;
 
-	bool isFpressed;
-
 	// int tileSize = 64;
 
+	int main_hero_frame_height;
 
 private:
 	/** Calculates the position of this object's upper-left corner.
@@ -64,7 +64,6 @@ private:
 
 	// int frameWidth;
 	int main_hero_frame_width;
-	int main_hero_frame_height;
 
 
 	unsigned frameDelay;

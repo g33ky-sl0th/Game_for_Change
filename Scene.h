@@ -72,7 +72,9 @@ public:
 	
 	virtual void goNowhere();
 	
-	virtual void doInteractWith();
+	virtual void doInteractWith_1();
+
+	virtual void doInteractWith_2();
 	
 protected:
 	/* The player's avatar. 

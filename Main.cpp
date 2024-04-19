@@ -1,5 +1,6 @@
 #include "InputHandler.h"
 #include "ScarfyScene.h"
+#include "MainMenuScene.h"
 
 #include "raymath.h"
 #include "raylib.h"
@@ -38,15 +39,17 @@ int main(void)
 	try {
 		InputHandler inputHandler;
 		
-		std::shared_ptr<Scene> currScene = std::make_shared<ScarfyScene>();
+		std::shared_ptr<Scene> currScene = std::make_shared<MainMenuScene>();
 		currScene->loadResources();
 		currScene->start();
 
 		SetTargetFPS(60);
-		
+		SetExitKey(KEY_NULL);
 
 		// Main game loop
-		while (!WindowShouldClose())    // Detect window close button or ESC key
+		bool quit = false;
+
+		while (!quit)    // Detect window close button or ESC key
 		{
 			// Update
 			inputHandler.handleInput(*currScene);
@@ -69,6 +72,8 @@ int main(void)
 				nextScene->start();
 				currScene = nextScene;
 			}
+
+			quit = WindowShouldClose() || currScene->shouldQuit();
 			
 			// Draw
 			BeginDrawing();

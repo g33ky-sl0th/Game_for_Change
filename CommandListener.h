@@ -26,5 +26,7 @@ public:
 	
 	/* Select, push, pull, punch, fire, etc.
 	 */
-	virtual void doInteractWith();
+	virtual void doInteractWith_1();
+
+	virtual void doInteractWith_2();
 };

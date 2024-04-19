@@ -40,6 +40,7 @@ bool MainMenuScene::shouldQuit() {
 }
 
 void MainMenuScene::draw() {
+
 	Scene::draw();
 	
 	int sceneWidth = GetScreenWidth();
@@ -61,10 +62,13 @@ void MainMenuScene::draw() {
 	
 	GuiSetStyle(BUTTON, TEXT_ALIGNMENT, TEXT_ALIGN_CENTER);
 	GuiSetStyle(DEFAULT, TEXT_SIZE, MENU_FONT_SIZE);
+
 	if (GuiButton((Rectangle){ currX, currY, BUTTON_WIDTH, BUTTON_HEIGHT }, "Start Game")) {
 		startClicked = true;
 	}
+
 	currY += BUTTON_SPACING;
+	
 	if (GuiButton((Rectangle){ currX, currY, BUTTON_WIDTH, BUTTON_HEIGHT }, "Quit")) {
 		quit = true;
 	}

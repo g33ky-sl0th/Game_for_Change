@@ -21,5 +21,8 @@ void CommandListener::goDown() {
 void CommandListener::goNowhere() {
 }
 	
-void CommandListener::doInteractWith() {
+void CommandListener::doInteractWith_1() {
+}
+
+void CommandListener::doInteractWith_2() {
 }

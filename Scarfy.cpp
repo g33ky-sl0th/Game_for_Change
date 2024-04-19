@@ -55,10 +55,10 @@ Scarfy::Scarfy()
 	// std::cout << main_hero_frame_width << " " << main_hero_frame_height << "allah \n";
 
 	// frameRect = {0.0f, 0.0f, (float)frameWidth, (float)texture.height};
-    Rectangle main_hero_frame = {0.0f, 0.0f, (float)main_hero_frame_width, (float)main_hero_frame_height};
+    main_hero_frame = {0.0f, 0.0f, (float)main_hero_frame_width, (float)main_hero_frame_height};
 
 
-	frameDelay = 3;
+	frameDelay = 5;
 	frameDelayCounter = 0;
 
 	// frameIndex = 0;
@@ -177,8 +177,8 @@ void Scarfy::draw() {
 
 	DrawTiled(map, 0, 0, WHITE);
 
-	main_hero_frame.width = main_hero_frame_width;
-	main_hero_frame.height = main_hero_frame_height;
+	// main_hero_frame.width = main_hero_frame_width;
+	// main_hero_frame.height = main_hero_frame_height;
 
 
 
@@ -223,8 +223,12 @@ void Scarfy::goNowhere() {
 		velocity.y = 0;
 }
 	
-void Scarfy::doInteractWith() {
+void Scarfy::doInteractWith_1() {
 	isFpressed = true;
+}
+
+void Scarfy::doInteractWith_2() {
+	isFpressed = false;
 }
 
 Vector2 Scarfy::getUpperLeftPosition() {

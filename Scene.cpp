@@ -3,6 +3,8 @@
 
 #include "raymath.h"
 
+#include <cmath>
+
 Scene::Scene() {
 	int sceneHeight = GetScreenHeight();
 
@@ -28,28 +30,32 @@ void Scene::start() {
 	
 std::shared_ptr<Scene> Scene::update() {
 
+	auto scarfy = actors.front();
+	scarfy->position = Vector2Add(scarfy->position,scarfy->velocity);
+
+	
+
 	for(auto &actor : actors) {
 
-		actor->position = Vector2Add(actor->position,actor->velocity);
+		if (actor == scarfy){
+			continue;
+		}
 
-		// actor->position += actor->velocity;
-		
-		auto boundingRect = actor->getBoundingBox();
+		scarfy->update();
 
-		// auto distToGround = groundYPos - (boundingRect.y + boundingRect.height);
-		// bool isOnGround =  distToGround <= 0;
-		
-		// if(isOnGround) {
+		if (scarfy->isFpressed == true){
 
-		// 	actor->velocity.y = 0;
-		// 	actor->position.y += distToGround;
-		// } 
-		
-		// else {
-		// 	actor->velocity.y += gravity;
-		// }
+			float dist = ((scarfy->position.x - actor->position.x)*(scarfy->position.x - actor->position.x)) + ((scarfy->position.x - actor->position.x)*(scarfy->position.y - actor->position.y));
+			dist = sqrt(dist);
 
-		actor->update();
+			float ht = 50.0;
+
+			if (dist <= ht){
+				actor->update();
+			}
+		}
+
+		// auto boundingRect = actor->getBoundingBox();
 	}
 	
 	return nullptr;
@@ -68,7 +74,6 @@ void Scene::draw() {
 		for(auto &actor: actors) {
 			actor->draw();
 		}
-
 	} 
 	
 	else {
@@ -106,8 +111,14 @@ void Scene::goNowhere() {
 	}
 }
 	
-void Scene::doInteractWith() {
+void Scene::doInteractWith_1() {
 	if(playerAvatar) {
-		playerAvatar->doInteractWith();
+		playerAvatar->doInteractWith_1();
+	}
+}
+
+void Scene::doInteractWith_2() {
+	if(playerAvatar) {
+		playerAvatar->doInteractWith_2();
 	}
 }

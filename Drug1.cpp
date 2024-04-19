@@ -59,10 +59,12 @@ Drug1::Drug1()
 	frame_counter_hori = 5;
     frame_counter_vert = 0;
 
-	// frameRect = {0.0f, 0.0f, (float)frameWidth, (float)texture.height};
-    Rectangle drug_1_frame = {5.0f * (float)drug_1_frame_width, 0.0f, (float)drug_1_frame_width, (float)drug_1_frame_height};
+	float init_width_loc = 5.0f * drug_1_frame_width;
 
-	frameDelay = 3;
+	// frameRect = {0.0f, 0.0f, (float)frameWidth, (float)texture.height};
+    drug_1_frame = {320.0f , 0.0f, (float)drug_1_frame_width, (float)drug_1_frame_height};
+
+	frameDelay = 8;
 	frameDelayCounter = 0;
 
 	walkSpeed = 2;
