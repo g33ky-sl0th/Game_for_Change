@@ -41,7 +41,11 @@ void InputHandler::handleInput(CommandListener &listener) {
 	}
 	
 	// Select, push, pull, etc.
-	if(IsKeyDown(KEY_SPACE) || IsKeyDown(KEY_ENTER)){
-		listener.doInteractWith();
+	if(IsKeyDown(KEY_F)){
+		listener.doInteractWith_1();
+	}
+
+	else if (!IsKeyDown(KEY_F)){
+		listener.doInteractWith_2();
 	}
 }
