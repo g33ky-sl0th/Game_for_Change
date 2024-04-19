@@ -21,4 +21,6 @@ public:
 private:
 	bool startClicked;
 	bool quit;
+	float fadeInProgress;
+	Music backgroundMusic;
 };
