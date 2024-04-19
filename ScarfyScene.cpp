@@ -22,7 +22,7 @@ void ScarfyScene::loadResources() {
 	int sceneWidth = GetScreenWidth();
 	int sceneHeight = GetScreenHeight();
 	// scarfy->position = {(float)sceneWidth / 2, (float)groundYPos};
-	scarfy->position = {(float)sceneWidth / 2, (float)sceneHeight/2};
+	scarfy->position = {180.0f, 180.0f};
 
 	// Determine positions in world space
 	Vector2 drug1Pos = {200.0f, 200.0f}; // Example position for drug1

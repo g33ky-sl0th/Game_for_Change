@@ -33,10 +33,13 @@ Scarfy::Scarfy()
         
     {
 
+	int sceneWidth = GetScreenWidth();
+	int sceneHeight = GetScreenHeight();
+
 	screen_camera.target = {position.x, position.y};
-	screen_camera.offset = { 800.0f, 450.0f };
+	screen_camera.offset = { sceneWidth / 2.0f, sceneHeight / 2.0f };
     screen_camera.rotation = 0.0f;
-    screen_camera.zoom = 1.6f;
+    screen_camera.zoom = 1.5f;
 
 	isMain = true;
 	isFpressed = false;
@@ -44,7 +47,7 @@ Scarfy::Scarfy()
     main_hero = LoadTexture("main_hero_movt.png");
 	// car = LoadTexture("Car_1_01.png");
 
-	Image mapImage = LoadImage("IITD-map2.png");
+	mapImage = LoadImage("IITD-map2.png");
 	mapTexture = LoadTextureFromImage(mapImage);
 
 
@@ -74,7 +77,7 @@ Scarfy::Scarfy()
 	frame_counter_hori = 0;
     frame_counter_vert = 0;
 
-	walkSpeed = 2;
+	walkSpeed = 50;
 
 	// jumpSpeed = 2 * walkSpeed;
 	
@@ -153,28 +156,6 @@ bool Scarfy::update() {
                 main_hero_frame.y = (float)frame_counter_vert * main_hero_frame_height;
 			}
 
-			// if(isOnGround) {
-
-			// 	++frameIndex;
-			// 	frameIndex %= numFrames;
-				
-			// 	// if(isFootstepFrame(frameIndex)) {
-			// 	// 	PlaySound(footstepSound);
-			// 	// }
-			// } 
-			
-			// else {
-
-			// 	if(velocity.y < 0) {
-			// 		frameIndex = jumpUpFrame;
-			// 	} else {
-			// 		frameIndex = jumpDownFrame;
-			// 	}
-			// }
-
-
-			// frameRect.x = (float) frameWidth * frameIndex;
-
 		}
 	}
 	
@@ -207,26 +188,72 @@ Rectangle Scarfy::getBoundingBox() {
 	
 void Scarfy::goUp() {
 
-	velocity.x = 0;
-	velocity.y = -walkSpeed;
+	Color c1 = GetImageColor(mapImage,position.x , position.y - walkSpeed);
+
+	if ((c1.r == 35 && c1.g == 35 && c1.b ==45 && c1.a ==255) || (c1.r == 35 && c1.g == 255 && c1.b ==255 && c1.a ==255)) {
+
+		velocity.x = 0;
+		velocity.y = -walkSpeed;
+	}
+
+
+	else{
+
+		velocity.x = 0;
+		velocity.y = 0;
+	}
 }
 
 void Scarfy::goDown() {
 
-	velocity.x = 0;
-	velocity.y = +walkSpeed;
+	Color c1 = GetImageColor(mapImage,position.x , position.y + walkSpeed);
+
+	if ((c1.r == 35 && c1.g == 35 && c1.b ==45 && c1.a ==255) || (c1.r == 35 && c1.g == 255 && c1.b ==255 && c1.a ==255)){
+
+		velocity.x = 0;
+		velocity.y = +walkSpeed;
+	}
+
+	else{
+
+		velocity.x = 0;
+		velocity.y = 0;
+	}
+
 }
 	
 void Scarfy::goLeft() {
 
-	velocity.y = 0;
-	velocity.x = -walkSpeed;
+	Color c1 = GetImageColor(mapImage, position.x - walkSpeed, position.y);
+
+	if ((c1.r == 35 && c1.g == 35 && c1.b ==45 && c1.a ==255) || (c1.r == 35 && c1.g == 255 && c1.b ==255 && c1.a ==255)){
+
+		velocity.y = 0;
+		velocity.x = -walkSpeed;
+	}
+
+	else{
+
+		velocity.x = 0;
+		velocity.y = 0;
+	}
 }
 	
 void Scarfy::goRight() {
 
-	velocity.y = 0;
-	velocity.x = +walkSpeed;
+	Color c1= GetImageColor(mapImage, position.x + walkSpeed, position.y);
+
+	if ((c1.r == 35 && c1.g == 35 && c1.b ==45 && c1.a ==255) || (c1.r == 35 && c1.g == 255 && c1.b ==255 && c1.a ==255)) {
+
+        velocity.y = 0;
+		velocity.x = +walkSpeed;
+    }
+
+	else{
+
+		velocity.x = 0;
+		velocity.y = 0;
+	}
 }
 
 void Scarfy::goNowhere() {
