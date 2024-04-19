@@ -33,6 +33,8 @@ Drug5::Drug5()
         
     {
 
+    screen_camera = CommandListener::screen_camera;
+
 	isRevived = false;
 
 	isMain = false;
@@ -125,6 +127,8 @@ void Drug5::draw() {
 	// std::cout << "hello";
 	Vector2 ulPosition = getUpperLeftPosition();
 
+    BeginMode2D(screen_camera);
+
 	// std::cout << "here - " << map.height << " " << map.width << " " << map.tileWidth << " " << map.tileHeight << "\n";
 	
 
@@ -146,6 +150,8 @@ void Drug5::draw() {
 	}
 
 	// DrawTexture(car, 0, 0, RED);
+
+    EndMode2D();
 
 }
 	
