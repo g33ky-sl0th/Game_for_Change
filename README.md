@@ -48,3 +48,7 @@ export LC_ALL=en_IN.UTF-8
 ```
 
 Now try running Main.out
+
+## screenshots
+![alt text](https://drive.google.com/file/d/1oPEY6GO0besM_FRw0XJbX5OpoJV04YxC/view?usp=sharing)
+![alt text](https://drive.google.com/file/d/1IHdFv8jHjJ_w7iSwD3KNnamVU-clfvS8/view?usp=sharing)
